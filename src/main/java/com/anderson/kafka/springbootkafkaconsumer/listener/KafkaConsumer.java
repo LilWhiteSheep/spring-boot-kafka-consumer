@@ -19,7 +19,7 @@ public class KafkaConsumer
     {
         try
         {
-            fileOutputStream = new FileOutputStream("D:\\testFile\\output\\test_550MB.exe");
+            fileOutputStream = new FileOutputStream("D:\\testFile\\output\\test_50MB.exe");
         } catch (FileNotFoundException e)
         {
             e.printStackTrace();
