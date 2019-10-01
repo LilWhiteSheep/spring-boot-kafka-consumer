@@ -9,17 +9,21 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+
 //fortest
 @Service
 public class KafkaConsumer
 {
+    private final byte[] fileNameBytes = {0x00, 0x09};
+    private final byte[] fileContentBytes = {0x00, 0x10};
     private final byte[] finalBytes = {0x00, 0x11};
+    int fileNmaeMessageNo;
     FileOutputStream fileOutputStream;
 
     {
         try
         {
-            fileOutputStream = new FileOutputStream("D:\\testFile\\output\\test_50MB.exe");
+            fileOutputStream = new FileOutputStream("D:\\testFile\\output\\test_5000MB.exe");
         } catch (FileNotFoundException e)
         {
             e.printStackTrace();
@@ -43,21 +47,55 @@ public class KafkaConsumer
     {
         System.out.println("Consumed file Message: key " + record.key() + ", value " + Arrays.toString(record.value()));
         byte[] receivedBytes = record.value();
-        if(Arrays.equals(record.value(), finalBytes))
+
+        //get file name byte
+        if (Arrays.equals(record.value(), fileNameBytes))
+        {
+            fileNmaeMessageNo = record.key() + 1;
+            return;
+        }
+
+        //get file name
+        if(record.key() == fileNmaeMessageNo)
+        {
+            String fileName = new String(receivedBytes);
+            try
+            {
+                fileOutputStream = new FileOutputStream("D:\\testFile\\output\\" + fileName);
+                return;
+            } catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+
+        if (Arrays.equals(record.value(), finalBytes))
         {
             System.out.println("Consume over");
             try
             {
                 fileOutputStream.close();
+                try
+                {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
             } catch (IOException e)
             {
                 e.printStackTrace();
             }
             return;
         }
-        try {
+
+
+        try
+        {
             fileOutputStream.write(receivedBytes);
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
 
