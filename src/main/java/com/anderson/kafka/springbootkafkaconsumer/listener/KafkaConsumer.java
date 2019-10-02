@@ -47,7 +47,7 @@ public class KafkaConsumer
         System.out.println("Consumed JSON Message: " + user);
     }
 
-    @KafkaListener(topics = TOPIC_B, groupId = "group_file", containerFactory = "fileKafkaListenerContainerFactory")
+    @KafkaListener(topics = TOPIC_A, groupId = "group_file", containerFactory = "fileKafkaListenerContainerFactory")
     public void consumeFile(ConsumerRecord<Integer, byte[]> record)
     {
         System.out.println("Consumed file Message: key " + record.key() + ", value " + Arrays.toString(record.value()));
