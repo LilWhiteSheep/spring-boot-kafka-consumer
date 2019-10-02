@@ -14,6 +14,11 @@ import java.util.Arrays;
 @Service
 public class KafkaConsumer
 {
+
+    private static final String TOPIC_A = "Kafka_Example_file_A";
+    private static final String TOPIC_B = "Kafka_Example_file_B";
+    private static final String TOPIC_C = "Kafka_Example_file_C";
+
     private final byte[] fileNameBytes = {0x00, 0x09};
     private final byte[] fileContentBytes = {0x00, 0x10};
     private final byte[] finalBytes = {0x00, 0x11};
@@ -42,7 +47,7 @@ public class KafkaConsumer
         System.out.println("Consumed JSON Message: " + user);
     }
 
-    @KafkaListener(topics = "Kafka_Example_file", groupId = "group_file", containerFactory = "fileKafkaListenerContainerFactory")
+    @KafkaListener(topics = TOPIC_B, groupId = "group_file", containerFactory = "fileKafkaListenerContainerFactory")
     public void consumeFile(ConsumerRecord<Integer, byte[]> record)
     {
         System.out.println("Consumed file Message: key " + record.key() + ", value " + Arrays.toString(record.value()));
