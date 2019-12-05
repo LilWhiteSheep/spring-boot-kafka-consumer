@@ -18,7 +18,7 @@ public class KafkaConsumer
 {
 
 //    private static final String TOPIC_A = "Kafka_Example_file_A"; //for file experiment
-    private static final String TOPIC_A = "topicTest2"; //for test
+    private static final String TOPIC_A = "fileTest"; //for test
     private static final String TOPIC_B = "Kafka_Example_file_B";
     private static final String TOPIC_C = "Kafka_Example_file_C";
 
@@ -40,23 +40,23 @@ public class KafkaConsumer
 //        }
     }
 
-    @KafkaListener(topics = "Kafka_Example", groupId = "group_id")
-    public void consume(String message)
-    {
-        System.out.println("Consumed message: " + message);
-    }
-
-    @KafkaListener(topics = "Kafka_Example_json", groupId = "group_json", containerFactory = "userKafkaListenerFactory")
-    public void consumeJson(User user)
-    {
-        System.out.println("Consumed JSON Message: " + user);
-    }
+//    @KafkaListener(topics = "Kafka_Example", groupId = "group_id")
+//    public void consume(String message)
+//    {
+//        System.out.println("Consumed message: " + message);
+//    }
+//
+//    @KafkaListener(topics = "Kafka_Example_json", groupId = "group_json", containerFactory = "userKafkaListenerFactory")
+//    public void consumeJson(User user)
+//    {
+//        System.out.println("Consumed JSON Message: " + user);
+//    }
 
     @KafkaListener(topics = TOPIC_A, groupId = "group_file", containerFactory = "fileKafkaListenerContainerFactory")
     public void consumeFile(ConsumerRecord<Integer, byte[]> record, Acknowledgment ack)
     {
-        System.out.println("messageNo : " + messageNo + "   record.key : " + record.key());
-        System.out.println("Consumed file Message: key " + record.key() + ", value " + Arrays.toString(record.value()));
+//        System.out.println("messageNo : " + messageNo + "   record.key : " + record.key());
+//        System.out.println("Consumed file Message: key " + record.key() + ", value " + Arrays.toString(record.value()));
 
         byte[] receivedBytes = record.value();
 //        try
@@ -134,7 +134,7 @@ public class KafkaConsumer
             if(messageNo == record.key())
             {
                 fileOutputStream.write(receivedBytes);
-                System.out.println("write Bytes");
+//                System.out.println("write Bytes");
                 //提交offset
                 messageNo++;
                 ack.acknowledge();
