@@ -51,8 +51,7 @@ public class KafkaConsumer
             String fileName = new String(receivedBytes);
             try
             {
-                fileOutputStream = new FileOutputStream("D:\\NtustMaster\\First\\Project\\CIMFORCE\\testFile\\output\\" + fileName);
-//                fileOutputStream = new FileOutputStream("D:\\NtustMaster\\" + fileName);
+                fileOutputStream = new FileOutputStream("D:\\TEST\\" + fileName);
                 System.out.println("get fileNameInBytes");
 
                 //submit offset
