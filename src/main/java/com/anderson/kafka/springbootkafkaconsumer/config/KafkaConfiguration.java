@@ -100,13 +100,10 @@ public class KafkaConfiguration
     {
         ConcurrentKafkaListenerContainerFactory<Integer, byte[]> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(fileConsumerFactory());
-        //手動提交offset
-        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+        //手動提交offset  若未寫則表示為自動提交
+        //factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
 
         return factory;
-//        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory();
-//        factory.setConsumerFactory(consumerFactory());
-//        return factory;
     }
 
 }
