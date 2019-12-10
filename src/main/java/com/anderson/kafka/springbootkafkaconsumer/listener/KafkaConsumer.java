@@ -27,7 +27,7 @@ public class KafkaConsumer
     int messageNo = 1;
 
 
-    @KafkaListener(topics = TOPIC_A, groupId = "group_file", containerFactory = "fileKafkaListenerContainerFactory")
+    @KafkaListener(topics = TOPIC_A, groupId = "group_file", containerFactory = "kafkaListenerContainerFactory")
     public void consumeFile(ConsumerRecord<Integer, byte[]> record, Acknowledgment ack)//ack is for manual submit offset
     {
 
@@ -51,7 +51,8 @@ public class KafkaConsumer
             String fileName = new String(receivedBytes);
             try
             {
-                fileOutputStream = new FileOutputStream("D:\\NtustMaster\\First\\Project\\CIMFORCE\\testFile\\output\\" + fileName);
+//                fileOutputStream = new FileOutputStream("D:\\NtustMaster\\First\\Project\\CIMFORCE\\testFile\\output\\" + fileName);
+                fileOutputStream = new FileOutputStream("D:\\NtustMaster\\" + fileName);
                 System.out.println("get fileNameInBytes");
 
                 //submit offset
