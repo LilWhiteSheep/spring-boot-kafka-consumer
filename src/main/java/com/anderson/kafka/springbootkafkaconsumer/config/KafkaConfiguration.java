@@ -31,7 +31,7 @@ public class KafkaConfiguration
         Map<String, Object> config = new HashMap<>();
 
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "140.118.109.106:9092");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
+        //config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, IntegerDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);
         //手動提交offset
